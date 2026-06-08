@@ -17,29 +17,24 @@ public class MainApplication {
         
         profile.setParameter(Profile.MAIN_HOST, "localhost");
         profile.setParameter(Profile.MAIN_PORT, "1099");
-        
-        profile.setParameter(Profile.GUI, "true");
+        profile.setParameter(Profile.GUI, "true"); //abre a interface gráfica
+
+        System.out.println("=== Inicializando a Plataforma Multiagente JADE ===");
+
+        AgentContainer mainContainer = runtime.createMainContainer(profile);
 
         try {
-            System.out.println("=== Inicializando a Plataforma Multiagente JADE ===");
-            
-            AgentContainer mainContainer = runtime.createMainContainer(profile);
             System.out.println("Main Container criado com sucesso.");
 
-            // 4. Exemplo de inicialização dinâmica de agentes (Opcional)
-            String nomeAgente = "TranslateAgent";
-            String caminhoClasse = "br.com.sma_bad_smells.sma.agents.TranslateAgent";
-            Object[] argumentosDoAgente = new Object[] {};
-
-            System.out.println("Criando o agente: " + nomeAgente);
-            AgentController agentController = mainContainer.createNewAgent(
-                nomeAgente, 
-                caminhoClasse, 
-                argumentosDoAgente
+            System.out.println("Criando agente...");
+            AgentController dataAgentController = mainContainer.createNewAgent(
+                "dataAgent",
+                "br.com.sma_bad_smells.sma.agents.DataAgent",
+                new Object[]{}
             );
             
             // Inicia o ciclo de vida do agente (dispara o método setup() interno)
-            agentController.start();
+            dataAgentController.start();
 
             System.out.println("=== Sistema pronto e monitorado via GUI ===");
 

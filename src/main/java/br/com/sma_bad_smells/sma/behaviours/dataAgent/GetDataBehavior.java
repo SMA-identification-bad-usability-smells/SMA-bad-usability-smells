@@ -1,0 +1,29 @@
+package br.com.sma_bad_smells.sma.behaviours.dataAgent;
+
+import br.com.sma_bad_smells.sma.agents.DataAgent;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
+
+public class GetDataBehavior extends TickerBehaviour {
+
+    private static final String API_URL = "http://localhost:8080/api/logs";
+
+    private final DataAgent agent;
+
+    public GetDataBehavior(DataAgent agent, long periodMs){
+        super(agent, periodMs);
+        this.agent = agent;
+    }
+
+    @Override
+    public void onTick() {
+        try{
+            String data = agent.getApiService().getData(API_URL);
+            agent.setMostRecentData(data);
+            System.out.println(agent.getLocalName() + ": dados atualizados.");
+            System.out.println(agent.getMostRecentData());
+        } catch (Exception e) {
+            System.out.println(agent.getLocalName() + ": falha ao buscar dados | " + e.getMessage());
+        }
+    }
+}
