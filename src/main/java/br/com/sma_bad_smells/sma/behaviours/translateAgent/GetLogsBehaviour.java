@@ -26,7 +26,7 @@ public class GetLogsBehaviour extends CyclicBehaviour {
             System.out.println(agent.getLocalName() + " recebeu dados de " + msg.getSender().getLocalName());
             System.out.println("Mesage: " + msg.getContent());
 
-            agent.addLog(msg.getContent());
+            agent.addLogsApi(msg.getContent());
 
             agent.addBehaviour(new SendConfirmationBehaviour(agent, "dataAgent"));
         }
