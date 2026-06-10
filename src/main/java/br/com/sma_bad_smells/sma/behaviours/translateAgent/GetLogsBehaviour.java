@@ -1,8 +1,8 @@
 package br.com.sma_bad_smells.sma.behaviours.translateAgent;
 
-import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
@@ -26,6 +26,10 @@ public class GetLogsBehaviour extends CyclicBehaviour {
         if(msg != null){
             System.out.println(agent.getLocalName() + " recebeu dados de " + msg.getSender().getLocalName());
             System.out.println("Mesage: " + msg.getContent());
+
+            agent.addLog(msg.getContent());
+
+            agent.addBehaviour(new SendConfirmationBehaviour(agent, "dataAgent"));
         }
         else block();
 
