@@ -19,8 +19,6 @@ public class MainApplication {
         profile.setParameter(Profile.MAIN_PORT, "1099");
         profile.setParameter(Profile.GUI, "true"); //abre a interface gráfica
 
-        System.out.println("=== Inicializando a Plataforma Multiagente JADE ===");
-
         AgentContainer mainContainer = runtime.createMainContainer(profile);
 
         try {
@@ -42,10 +40,8 @@ public class MainApplication {
             );
             translateAgentController.start();
 
-            System.out.println("=== Sistema pronto e monitorado via GUI ===");
-
         } catch (RuntimeException e) {
-            System.err.println("Falha crítica ao inicializar o container ou agente do JADE.");
+            System.err.println("Falha ao inicializar.");
             e.printStackTrace();
         } catch (StaleProxyException e) {
             throw new RuntimeException(e);

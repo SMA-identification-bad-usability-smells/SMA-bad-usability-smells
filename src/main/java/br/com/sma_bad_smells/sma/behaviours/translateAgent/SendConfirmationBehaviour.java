@@ -22,7 +22,7 @@ public class SendConfirmationBehaviour extends OneShotBehaviour {
         msg.setContent("Logs recebidos com sucesso.");
         msg.setConversationId("api-logs");
 
-        System.out.println("Logs recebidos");
+        System.out.println("Logs recebidos.");
 
         agent.send(msg);
     }
