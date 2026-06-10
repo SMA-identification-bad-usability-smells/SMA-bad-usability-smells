@@ -5,18 +5,18 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-public class ReceiveRequestBehaviour extends CyclicBehaviour {
-    private final MessageTemplate messageTemplate = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
+public class ReceiveInformBehaviour extends CyclicBehaviour {
+    private final MessageTemplate messageTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
     private final DataAgent agent;
 
-    public ReceiveRequestBehaviour(DataAgent agent){
+    public ReceiveInformBehaviour(DataAgent agent){
         super(agent);
         this.agent = agent;
     }
 
     @Override
     public void action() {
-        ACLMessage message = agent.receive(messageTemplate); //procura na fila uma msg com o templete REQUEST
+        ACLMessage message = agent.receive(messageTemplate); //procura na fila uma msg com o templete INFORM
 
         if(message != null){
             ACLMessage response = message.createReply();

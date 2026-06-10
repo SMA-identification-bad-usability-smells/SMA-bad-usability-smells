@@ -2,7 +2,6 @@ package br.com.sma_bad_smells.sma.behaviours.translateAgent;
 
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
 import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
