@@ -10,17 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TranslateAgent extends Agent {
-    private List<String> logsApi;
-    private List<Logs> logs;
-    private List<NormalizedLogs> normalizedLogs;
+    private List<String> logsApi = new ArrayList<>();
+    private final List<Logs> logs = new ArrayList<>();
+    private final List<NormalizedLogs> normalizedLogs = new ArrayList<>();
 
     @Override
     protected void setup(){
-        System.out.println("Olá, sou o agente tradutor!" + getLocalName());
-
-        this.logs = new ArrayList<>();
-        this.logsApi = new ArrayList<>();
-        this.normalizedLogs = new ArrayList<>();
+        System.out.println("Olá, sou o agente tradutor " + getLocalName());
 
         addBehaviour(new GetLogsBehaviour(this));
         addBehaviour(new NormalizeLogsBehaviour(this));
@@ -35,24 +31,12 @@ public class TranslateAgent extends Agent {
         return logsApi;
     }
 
-    public void setLogsApi(List<String> logsApi) {
-        this.logsApi = logsApi;
-    }
-
     public List<Logs> getLogs() {
         return logs;
     }
 
-    public void setLogs(List<Logs> logs) {
-        this.logs = logs;
-    }
-
     public List<NormalizedLogs> getNormalizedLogs() {
         return normalizedLogs;
-    }
-
-    public void setNormalizedLogs(List<NormalizedLogs> normalizedLogs) {
-        this.normalizedLogs = normalizedLogs;
     }
 
     public void addLogsApi(String logApi){
@@ -65,5 +49,9 @@ public class TranslateAgent extends Agent {
 
     public void addNormalizedLogs(NormalizedLogs newNormalizedLogs){
         this.normalizedLogs.add(newNormalizedLogs);
+    }
+
+    public void setLogsApi(List<String> logsApi) {
+        this.logsApi = logsApi;
     }
 }

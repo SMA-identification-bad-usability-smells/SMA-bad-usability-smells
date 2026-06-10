@@ -29,6 +29,8 @@ public class Logs {
         this.targetElementId = targetElementId;
     }
 
+    public Logs(){}
+
     public Long getId() {
         return id;
     }
