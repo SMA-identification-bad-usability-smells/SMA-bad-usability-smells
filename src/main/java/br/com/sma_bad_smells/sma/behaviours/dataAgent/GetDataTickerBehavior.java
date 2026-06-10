@@ -4,13 +4,13 @@ import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.utils.Config;
 import jade.core.behaviours.TickerBehaviour;
 
-public class GetDataBehavior extends TickerBehaviour {
+public class GetDataTickerBehavior extends TickerBehaviour {
 
     private static final String API_URL = Config.API_URL;
 
     private final DataAgent agent;
 
-    public GetDataBehavior(DataAgent agent, long periodMs){
+    public GetDataTickerBehavior(DataAgent agent, long periodMs){
         super(agent, periodMs);
         this.agent = agent;
     }
