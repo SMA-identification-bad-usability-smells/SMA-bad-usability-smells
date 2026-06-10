@@ -1,12 +1,12 @@
 package br.com.sma_bad_smells.sma.behaviours.dataAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
-import jade.core.behaviours.CyclicBehaviour;
+import br.com.sma_bad_smells.sma.utils.Config;
 import jade.core.behaviours.TickerBehaviour;
 
 public class GetDataBehavior extends TickerBehaviour {
 
-    private static final String API_URL = "http://localhost:8080/api/logs";
+    private static final String API_URL = Config.API_URL;
 
     private final DataAgent agent;
 
