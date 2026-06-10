@@ -1,5 +1,6 @@
 package br.com.sma_bad_smells.sma.agents;
 
+import br.com.sma_bad_smells.sma.behaviours.translateAgent.GetLogsBehaviour;
 import jade.core.Agent;
 
 public class TranslateAgent extends Agent {
@@ -7,7 +8,7 @@ public class TranslateAgent extends Agent {
     protected void setup(){
         System.out.println("Olá, sou o agente tradutor!" + getLocalName());
 
-        doDelete();
+        addBehaviour(new GetLogsBehaviour(this));
     }
 
     @Override

@@ -1,8 +1,9 @@
 package br.com.sma_bad_smells.sma.agents;
 
-import br.com.sma_bad_smells.sma.behaviours.dataAgent.GetDataOneShotBehavior;
-import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveRequestBehavior;
+import br.com.sma_bad_smells.sma.behaviours.dataAgent.GetDataTickerBehaviour;
+import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveRequestBehaviour;
 import br.com.sma_bad_smells.sma.service.ApiService;
+import br.com.sma_bad_smells.sma.utils.Config;
 import jade.core.Agent;
 
 public class DataAgent extends Agent {
@@ -13,8 +14,8 @@ public class DataAgent extends Agent {
     protected void setup(){
         System.out.println("Agente " + getLocalName() + " foi iniciado com sucesso.");
 
-        addBehaviour(new GetDataOneShotBehavior(this));
-        addBehaviour(new ReceiveRequestBehavior(this));
+        addBehaviour(new GetDataTickerBehaviour(this, Config.INTERVAL_MS));
+        addBehaviour(new ReceiveRequestBehaviour(this));
     }
 
     @Override

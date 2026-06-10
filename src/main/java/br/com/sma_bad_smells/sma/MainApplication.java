@@ -32,9 +32,15 @@ public class MainApplication {
                 "br.com.sma_bad_smells.sma.agents.DataAgent",
                 new Object[]{}
             );
-            
             // Inicia o ciclo de vida do agente (dispara o método setup() interno)
             dataAgentController.start();
+
+            AgentController translateAgentController = mainContainer.createNewAgent(
+                    "translateAgent",
+                    "br.com.sma_bad_smells.sma.agents.TranslateAgent",
+                    new Object[]{}
+            );
+            translateAgentController.start();
 
             System.out.println("=== Sistema pronto e monitorado via GUI ===");
 
