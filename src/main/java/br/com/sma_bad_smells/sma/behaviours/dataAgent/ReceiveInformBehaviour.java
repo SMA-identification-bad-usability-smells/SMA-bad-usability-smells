@@ -30,14 +30,7 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         if(message != null){
 //            INFORMAR PARA A API QUAIS LOGS FORAM RECEBIDOS COM SUCESSO PELO TRADUTOR
             try {
-                @SuppressWarnings("unchecked")
-                List<Long> ids = (List<Long>) message.getContentObject();
-
-                System.out.println("[IDS COLETADOS COM SUCESSO] " + ids);
-
-                String idsSting = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
-
-                LogsIdsDTO logsIdsRequest = new LogsIdsDTO(idsSting);
+                LogsIdsDTO logsIdsRequest = this.getLogsIdsDTOByMessageContent(message);
 
                 agent.addBehaviour(new SendLosgsIDsBehaviour(agent, logsIdsRequest));
             } catch (UnreadableException e) {
@@ -47,5 +40,16 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         else {
             block();
         }
+    }
+
+    private LogsIdsDTO getLogsIdsDTOByMessageContent(ACLMessage message) throws UnreadableException {
+        @SuppressWarnings("unchecked")
+        List<Long> ids = (List<Long>) message.getContentObject();
+
+        System.out.println("[IDS COLETADOS COM SUCESSO] " + ids);
+
+        String idsSting = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        return new LogsIdsDTO(idsSting);
     }
 }
