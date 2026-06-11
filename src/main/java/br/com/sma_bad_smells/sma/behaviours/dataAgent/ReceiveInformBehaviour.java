@@ -46,8 +46,6 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         @SuppressWarnings("unchecked")
         List<Long> ids = (List<Long>) message.getContentObject();
 
-        System.out.println("[IDS COLETADOS COM SUCESSO] " + ids);
-
         String idsSting = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
 
         return new LogsIdsDTO(idsSting);
