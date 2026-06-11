@@ -20,9 +20,6 @@ public class GetDataTickerBehaviour extends TickerBehaviour {
         try{
             String data = agent.getApiService().getData(API_URL);
             agent.setMostRecentData(data);
-            System.out.println(agent.getLocalName() + ": dados atualizados.");
-            System.out.println(agent.getMostRecentData());
-
             agent.addBehaviour(new SendLogsBehaviour(agent, "translateAgent"));
         } catch (Exception e) {
             System.out.println(agent.getLocalName() + ": falha ao buscar dados | " + e.getMessage());

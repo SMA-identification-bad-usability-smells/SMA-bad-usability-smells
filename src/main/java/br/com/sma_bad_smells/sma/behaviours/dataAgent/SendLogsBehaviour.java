@@ -21,13 +21,15 @@ public class SendLogsBehaviour extends OneShotBehaviour {
 
         if (data == null || data.isBlank()) return;
 
+        this.sendLogsApi(data);
+    }
+
+    private void sendLogsApi(String data){
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.addReceiver(new AID(recipient, AID.ISLOCALNAME));
         msg.setContent(data);
         msg.setConversationId("api-logs");
 
         agent.send(msg);
-
-        System.out.println(agent.getLocalName() + " enviou logs para " + recipient);
     }
 }
