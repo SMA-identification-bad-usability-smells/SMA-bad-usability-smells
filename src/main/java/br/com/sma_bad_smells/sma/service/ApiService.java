@@ -3,7 +3,6 @@ package br.com.sma_bad_smells.sma.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -54,6 +53,6 @@ public class ApiService {
         int status = response.statusCode();
         if(status >= 200 && status < 300) return response.body();
 
-        throw new RuntimeException("PUT falho (status " + status + "): " + response.body());
+        throw new RuntimeException("PUT falhou (status " + status + "): " + response.body());
     }
 }

@@ -1,7 +1,7 @@
 package br.com.sma_bad_smells.sma.utils;
 
-import br.com.sma_bad_smells.sma.models.LogDTO;
-import br.com.sma_bad_smells.sma.models.Logs;
+import br.com.sma_bad_smells.sma.domain.dto.LogDTO;
+import br.com.sma_bad_smells.sma.domain.models.Logs;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;

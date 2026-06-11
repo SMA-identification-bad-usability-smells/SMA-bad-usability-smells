@@ -13,8 +13,6 @@ public class DataAgent extends Agent {
 
     @Override
     protected void setup(){
-        System.out.println("Agente " + getLocalName() + " foi iniciado com sucesso.");
-
         addBehaviour(new GetDataTickerBehaviour(this, Config.INTERVAL_MS));
         addBehaviour(new ReceiveRequestBehaviour(this));
         addBehaviour(new ReceiveInformBehaviour(this));

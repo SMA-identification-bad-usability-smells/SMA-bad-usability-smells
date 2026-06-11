@@ -23,15 +23,9 @@ public class GetLogsBehaviour extends CyclicBehaviour {
         ACLMessage msg = agent.receive(messageTemplate);
 
         if(msg != null){
-            System.out.println(agent.getLocalName() + " recebeu dados de " + msg.getSender().getLocalName());
-            System.out.println("[MESSAGE] " + msg.getContent());
-
             agent.addLogsApi(msg.getContent());
-
             agent.addBehaviour(new SendConfirmationBehaviour(agent, "dataAgent"));
         }
         else block();
-
-
     }
 }

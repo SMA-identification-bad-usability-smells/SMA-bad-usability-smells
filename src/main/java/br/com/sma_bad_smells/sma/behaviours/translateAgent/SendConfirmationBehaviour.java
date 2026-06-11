@@ -21,9 +21,6 @@ public class SendConfirmationBehaviour extends OneShotBehaviour {
         msg.addReceiver(new AID(recipient, AID.ISLOCALNAME));
         msg.setContent("Logs recebidos com sucesso.");
         msg.setConversationId("api-logs");
-
-        System.out.println("Logs recebidos.");
-
         agent.send(msg);
     }
 }

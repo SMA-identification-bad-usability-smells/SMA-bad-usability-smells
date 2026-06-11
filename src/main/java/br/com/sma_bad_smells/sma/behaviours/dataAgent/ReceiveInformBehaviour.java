@@ -1,7 +1,7 @@
 package br.com.sma_bad_smells.sma.behaviours.dataAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
-import br.com.sma_bad_smells.sma.models.LogsIdsRequest;
+import br.com.sma_bad_smells.sma.domain.dto.LogsIdsDTO;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -37,7 +37,7 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
 
                 String idsSting = ids.stream().map(String::valueOf).collect(Collectors.joining(","));
 
-                LogsIdsRequest logsIdsRequest = new LogsIdsRequest(idsSting);
+                LogsIdsDTO logsIdsRequest = new LogsIdsDTO(idsSting);
 
                 agent.addBehaviour(new SendLosgsIDsBehaviour(agent, logsIdsRequest));
             } catch (UnreadableException e) {
@@ -45,7 +45,7 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
             }
         }
         else {
-            block(); //trava o behavior por um tempo
+            block();
         }
     }
 }

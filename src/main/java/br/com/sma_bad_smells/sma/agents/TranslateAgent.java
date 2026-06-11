@@ -1,9 +1,9 @@
 package br.com.sma_bad_smells.sma.agents;
 
 import br.com.sma_bad_smells.sma.behaviours.translateAgent.GetLogsBehaviour;
-import br.com.sma_bad_smells.sma.behaviours.translateAgent.NormalizeLogsBehaviour;
-import br.com.sma_bad_smells.sma.models.Logs;
-import br.com.sma_bad_smells.sma.models.NormalizedLogs;
+import br.com.sma_bad_smells.sma.behaviours.translateAgent.FormattedLogsBehaviour;
+import br.com.sma_bad_smells.sma.domain.models.Logs;
+import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import jade.core.Agent;
 
 import java.util.ArrayList;
@@ -16,10 +16,8 @@ public class TranslateAgent extends Agent {
 
     @Override
     protected void setup(){
-        System.out.println("Olá, sou o agente tradutor " + getLocalName());
-
         addBehaviour(new GetLogsBehaviour(this));
-        addBehaviour(new NormalizeLogsBehaviour(this));
+        addBehaviour(new FormattedLogsBehaviour(this));
     }
 
     @Override
