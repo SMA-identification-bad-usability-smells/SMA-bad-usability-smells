@@ -17,10 +17,15 @@ public class SendConfirmationBehaviour extends OneShotBehaviour {
 
     @Override
     public void action() {
+        this.sendConfirmationMessage();
+    }
+
+    private void sendConfirmationMessage(){
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.addReceiver(new AID(recipient, AID.ISLOCALNAME));
         msg.setContent("Logs recebidos com sucesso.");
         msg.setConversationId("api-logs");
         agent.send(msg);
     }
+
 }
