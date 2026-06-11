@@ -2,6 +2,8 @@ package br.com.sma_bad_smells.sma.utils;
 
 import br.com.sma_bad_smells.sma.domain.dto.LogDTO;
 import br.com.sma_bad_smells.sma.domain.models.Logs;
+import br.com.sma_bad_smells.sma.exceptions.LogParsingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -23,18 +25,21 @@ public class LogParser {
 
     public List<Logs> parse(String json) throws Exception {
         List<Logs> result = new ArrayList<>();
+        try {
+            JsonNode root = mapper.readTree(json);
 
-        JsonNode root = mapper.readTree(json);
-
-        List<JsonNode> lists = root.findValues("logsList");
-        for (JsonNode logsList : lists) {
-            for (JsonNode node : logsList) {
-                LogDTO dto = mapper.treeToValue(node, LogDTO.class);
-                result.add(toLogs(dto));
+            List<JsonNode> lists = root.findValues("logsList");
+            for (JsonNode logsList : lists) {
+                for (JsonNode node : logsList) {
+                    LogDTO dto = mapper.treeToValue(node, LogDTO.class);
+                    result.add(toLogs(dto));
+                }
             }
-        }
 
-        return result;
+            return result;
+        } catch (JsonProcessingException e) {
+            throw new LogParsingException("JSON da API em formato inválido", e);
+        }
     }
 
     private Logs toLogs(LogDTO dto){

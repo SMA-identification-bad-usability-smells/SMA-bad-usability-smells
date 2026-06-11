@@ -2,6 +2,8 @@ package br.com.sma_bad_smells.sma.behaviours.translateAgent;
 
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
 import br.com.sma_bad_smells.sma.domain.models.Logs;
+import br.com.sma_bad_smells.sma.exceptions.LogParsingException;
+import br.com.sma_bad_smells.sma.exceptions.MessageSendingException;
 import br.com.sma_bad_smells.sma.utils.LogParser;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -25,10 +27,13 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
     public void action() {
         if(!agent.getLogsApi().isEmpty()){
             this.getLogsByLogsAPI();
-
             agent.setLogsApi(new ArrayList<>());
 
-            this.sendIdsListMsg();
+            try {
+                this.sendIdsListMsg();
+            } catch (MessageSendingException e) {
+                System.err.println(agent.getLocalName() + ": falha ao enviar IDs - " + e.getMessage());
+            }
         } else {
             block();
         }
@@ -37,8 +42,9 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
     private void getLogsByLogsAPI(){
         agent.getLogsApi().forEach( logApi -> {
             try {
-                List<Logs> logsList = logParser.parse(logApi);
-                logsList.forEach(agent::addLogs);
+                logParser.parse(logApi).forEach(agent::addLogs);
+            } catch (LogParsingException e) {
+                System.err.println(agent.getLocalName() + ": log ignorado, JSON inválido - " + e.getMessage());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -50,14 +56,15 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
                 .map(Logs::getId)
                 .collect(Collectors.toList());
 
+        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        msg.addReceiver(new AID("dataAgent", AID.ISLOCALNAME));
+        msg.setConversationId("logs-response");
+
         try {
-            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-            msg.addReceiver(new AID("dataAgent", AID.ISLOCALNAME));
-            msg.setConversationId("logs-response");
             msg.setContentObject(new ArrayList<>(ids));
             agent.send(msg);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new MessageSendingException("Não foi possível serializar os IDs para envio", e);
         }
     }
 }
