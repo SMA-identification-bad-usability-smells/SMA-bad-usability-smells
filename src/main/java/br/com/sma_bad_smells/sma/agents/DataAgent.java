@@ -1,6 +1,7 @@
 package br.com.sma_bad_smells.sma.agents;
 
 import br.com.sma_bad_smells.sma.behaviours.dataAgent.GetDataTickerBehaviour;
+import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveInformBehaviour;
 import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveRequestBehaviour;
 import br.com.sma_bad_smells.sma.service.ApiService;
 import br.com.sma_bad_smells.sma.utils.Config;
@@ -16,6 +17,7 @@ public class DataAgent extends Agent {
 
         addBehaviour(new GetDataTickerBehaviour(this, Config.INTERVAL_MS));
         addBehaviour(new ReceiveRequestBehaviour(this));
+        addBehaviour(new ReceiveInformBehaviour(this));
     }
 
     @Override
