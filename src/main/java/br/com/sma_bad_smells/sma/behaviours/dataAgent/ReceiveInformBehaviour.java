@@ -32,7 +32,7 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
             try {
                 LogsIdsDTO logsIdsRequest = this.getLogsIdsDTOByMessageContent(message);
 
-                agent.addBehaviour(new SendLosgsIDsBehaviour(agent, logsIdsRequest));
+                agent.addBehaviour(new SendLogsIDsBehaviour(agent, logsIdsRequest));
             } catch (UnreadableException e) {
                 e.printStackTrace();
             }
