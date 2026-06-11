@@ -1,4 +1,4 @@
-package br.com.sma_bad_smells.sma.models;
+package br.com.sma_bad_smells.sma.domain.enums;
 
 public enum InteractionType {
     PRESS("press"),

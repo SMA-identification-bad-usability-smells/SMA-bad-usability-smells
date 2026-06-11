@@ -1,9 +1,9 @@
-package br.com.sma_bad_smells.sma.models;
+package br.com.sma_bad_smells.sma.domain.dto;
 
-public class LogsIdsRequest {
+public class LogsIdsDTO {
     private String listLogsIds;
 
-    public LogsIdsRequest(String listLogsIds){
+    public LogsIdsDTO(String listLogsIds){
         this.listLogsIds = listLogsIds;
     }
 

@@ -1,5 +1,7 @@
-package br.com.sma_bad_smells.sma.models;
+package br.com.sma_bad_smells.sma.domain.dto;
 
+import br.com.sma_bad_smells.sma.domain.enums.GestureDirection;
+import br.com.sma_bad_smells.sma.domain.enums.InteractionType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
