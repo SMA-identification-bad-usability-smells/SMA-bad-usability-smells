@@ -19,13 +19,17 @@ public class ReceiveRequestBehaviour extends CyclicBehaviour {
         ACLMessage message = agent.receive(messageTemplate); //procura na fila uma msg com o templete REQUEST
 
         if(message != null){
-            ACLMessage response = message.createReply();
-            response.setPerformative(ACLMessage.INFORM);
-            response.setContent("Aqui estão os dados");
-            agent.send(response);
+            this.sendData(message);
         }
         else {
             block(); //trava o behavior por um tempo
         }
+    }
+
+    private void sendData(ACLMessage message){
+        ACLMessage response = message.createReply();
+        response.setPerformative(ACLMessage.INFORM);
+        response.setContent("Aqui estão os dados");
+        agent.send(response);
     }
 }
