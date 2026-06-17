@@ -26,7 +26,7 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
     @Override
     public void action() {
         if(!agent.getLogsApi().isEmpty()){
-            this.getLogsByLogsAPI();
+            this.getLogsByAPI();
             agent.setLogsApi(new ArrayList<>());
 
             try {
@@ -39,7 +39,7 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
         }
     }
 
-    private void getLogsByLogsAPI(){
+    private void getLogsByAPI(){
         agent.getLogsApi().forEach( logApi -> {
             try {
                 logParser.parse(logApi).forEach(agent::addLogs);
