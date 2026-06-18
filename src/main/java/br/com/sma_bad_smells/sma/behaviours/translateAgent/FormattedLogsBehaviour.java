@@ -34,6 +34,9 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
             } catch (MessageSendingException e) {
                 System.err.println(agent.getLocalName() + ": falha ao enviar IDs - " + e.getMessage());
             }
+
+            System.out.println("[LOGS] " + agent.getLogs());
+            System.out.println("Quantiade de logs: " + agent.getLogs().size());
         } else {
             block();
         }

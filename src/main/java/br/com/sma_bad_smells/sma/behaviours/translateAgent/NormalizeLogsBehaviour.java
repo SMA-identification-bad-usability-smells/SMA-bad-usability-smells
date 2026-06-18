@@ -6,6 +6,7 @@ import br.com.sma_bad_smells.sma.normalization.LogNormalizer;
 import br.com.sma_bad_smells.sma.normalization.LogNormalizerFactory;
 import jade.core.behaviours.CyclicBehaviour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NormalizeLogsBehaviour extends CyclicBehaviour {
@@ -19,9 +20,12 @@ public class NormalizeLogsBehaviour extends CyclicBehaviour {
 
     @Override
     public void action() {
-        if(!agent.getNormalizedLogs().isEmpty()){
+        if(!agent.getLogs().isEmpty()){
+            System.out.println("Preparando para normalizar...");
             List<NormalizedLogs> normalizedLogs = normalizer.normalize(agent.getLogs());
-            System.out.println(normalizedLogs);
+            System.out.println("[NORMALIZED LOGS] " + normalizedLogs);
+            System.out.println("Quantidade de logs normalizados: " + normalizedLogs.size());
+            agent.setLogs(new ArrayList<>());
         }
         else {
             block();
