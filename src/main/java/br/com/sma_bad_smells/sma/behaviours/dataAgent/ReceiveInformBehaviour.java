@@ -2,6 +2,7 @@ package br.com.sma_bad_smells.sma.behaviours.dataAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.domain.dto.LogsIdsDTO;
+import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -11,10 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReceiveInformBehaviour extends CyclicBehaviour {
-    private final MessageTemplate messageTemplate = MessageTemplate.and(
-            MessageTemplate.MatchPerformative(ACLMessage.INFORM),
-            MessageTemplate.MatchConversationId("logs-response")
-    );
+    private final MessageTemplate messageTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
 
     private final DataAgent agent;
 
@@ -28,17 +26,28 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         ACLMessage message = agent.receive(messageTemplate);
 
         if(message != null){
-//            INFORMAR PARA A API QUAIS LOGS FORAM RECEBIDOS COM SUCESSO PELO TRADUTOR
-            try {
-                LogsIdsDTO logsIdsRequest = this.getLogsIdsDTOByMessageContent(message);
+            String conversationId = message.getConversationId();
 
-                agent.addBehaviour(new SendLogsIDsBehaviour(agent, logsIdsRequest));
-            } catch (UnreadableException e) {
-                e.printStackTrace();
+            if(conversationId.equals("mormalized-logs")){
+                // envia para a api
+            }
+            else if(conversationId.equals("logs-response")){
+                sendLogsIDSDTOtoAPI(message);
             }
         }
         else {
             block();
+        }
+    }
+
+    private void sendLogsIDSDTOtoAPI(ACLMessage message){
+        //            INFORMAR PARA A API QUAIS LOGS FORAM RECEBIDOS COM SUCESSO PELO TRADUTOR
+        try {
+            LogsIdsDTO logsIdsRequest = this.getLogsIdsDTOByMessageContent(message);
+
+            agent.addBehaviour(new SendLogsIDsBehaviour(agent, logsIdsRequest));
+        } catch (UnreadableException e) {
+            e.printStackTrace();
         }
     }
 

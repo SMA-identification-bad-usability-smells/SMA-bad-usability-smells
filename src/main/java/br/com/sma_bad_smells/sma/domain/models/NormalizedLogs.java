@@ -3,10 +3,11 @@ package br.com.sma_bad_smells.sma.domain.models;
 import br.com.sma_bad_smells.sma.domain.enums.GestureDirection;
 import br.com.sma_bad_smells.sma.domain.enums.InteractionType;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class NormalizedLogs {
+public class NormalizedLogs implements Serializable {
     private Long id;
     private InteractionType interactionType;
     private Long frequency;

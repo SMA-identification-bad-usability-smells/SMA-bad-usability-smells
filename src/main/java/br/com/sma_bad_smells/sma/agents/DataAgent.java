@@ -16,6 +16,7 @@ public class DataAgent extends Agent {
         addBehaviour(new GetDataTickerBehaviour(this, Config.INTERVAL_MS));
         addBehaviour(new ReceiveRequestBehaviour(this));
         addBehaviour(new ReceiveInformBehaviour(this));
+
     }
 
     @Override

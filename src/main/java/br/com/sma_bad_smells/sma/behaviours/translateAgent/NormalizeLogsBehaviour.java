@@ -23,10 +23,11 @@ public class NormalizeLogsBehaviour extends CyclicBehaviour {
         if(!agent.getLogs().isEmpty()){
             System.out.println("Preparando para normalizar...");
             List<NormalizedLogs> normalizedLogs = normalizer.normalize(agent.getLogs());
-            System.out.println("[NORMALIZED LOGS] " + normalizedLogs);
             System.out.println("Quantidade de logs normalizados: " + normalizedLogs.size());
             agent.setLogs(new ArrayList<>());
 
+            agent.setNormalizedLogs(normalizedLogs);
+            System.out.println("[NORMALIZED LOGS] " + agent.getNormalizedLogs());
             agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, "dataAgent"));
         }
         else {
