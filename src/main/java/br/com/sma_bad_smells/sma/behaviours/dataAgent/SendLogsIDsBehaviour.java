@@ -27,7 +27,7 @@ public class SendLogsIDsBehaviour extends OneShotBehaviour {
 
     private void sendIdsListToAPI() throws Exception {
         String response = agent.getApiService().markLogsReceived(
-                API_URL + "/ids/all",
+                API_URL + "/logs/ids/all",
                 ids
         );
     }

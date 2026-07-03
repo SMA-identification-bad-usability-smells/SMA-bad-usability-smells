@@ -18,7 +18,7 @@ public class GetDataTickerBehaviour extends TickerBehaviour {
     @Override
     public void onTick() {
         try{
-            String data = agent.getApiService().getData(API_URL);
+            String data = agent.getApiService().getData(API_URL+"/logs");
             agent.setMostRecentData(data);
             agent.addBehaviour(new SendLogsBehaviour(agent, "translateAgent"));
         } catch (Exception e) {

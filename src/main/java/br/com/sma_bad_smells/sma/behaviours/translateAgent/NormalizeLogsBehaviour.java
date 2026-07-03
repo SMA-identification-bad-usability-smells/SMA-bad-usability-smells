@@ -28,6 +28,7 @@ public class NormalizeLogsBehaviour extends CyclicBehaviour {
 
             agent.setNormalizedLogs(normalizedLogs);
             System.out.println("[NORMALIZED LOGS] " + agent.getNormalizedLogs());
+
             agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, "dataAgent"));
         }
         else {
