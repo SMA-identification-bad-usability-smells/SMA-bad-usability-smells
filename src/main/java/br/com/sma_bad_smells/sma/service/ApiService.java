@@ -3,6 +3,7 @@ package br.com.sma_bad_smells.sma.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -55,4 +56,26 @@ public class ApiService {
 
         throw new RuntimeException("PUT falhou (status " + status + "): " + response.body());
     }
+
+    public String sendNormalizedLogsList(String url, Object body)
+            throws IOException, InterruptedException {
+        String jsonBody = mapper.writeValueAsString(body);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .timeout(Duration.ofSeconds(10))
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .build();
+
+        HttpResponse<String> response =
+                httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        int status = response.statusCode();
+        if(status >= 200 && status < 300) return response.body();
+
+        throw new RuntimeException("POST falho (status " + status + "): " + response.body());
+    }
+
 }
