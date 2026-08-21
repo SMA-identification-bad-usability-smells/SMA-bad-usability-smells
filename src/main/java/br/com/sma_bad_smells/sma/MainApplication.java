@@ -24,7 +24,8 @@ public class MainApplication {
         try {
             System.out.println("Main Container criado com sucesso.");
 
-            System.out.println("Criando agente...");
+            System.out.println("Criando agentes...");
+
             AgentController dataAgentController = mainContainer.createNewAgent(
                 "dataAgent",
                 "br.com.sma_bad_smells.sma.agents.DataAgent",
@@ -38,6 +39,13 @@ public class MainApplication {
                     new Object[]{}
             );
             translateAgentController.start();
+
+            AgentController persistenceAgentController = mainContainer.createNewAgent(
+                    "persistenceAgent",
+                    "br.com.sma_bad_smells.sma.agents.PersistenceAgent",
+                    new Object[]{}
+            );
+            persistenceAgentController.start();
 
         } catch (RuntimeException e) {
             System.err.println("Falha ao inicializar.");
