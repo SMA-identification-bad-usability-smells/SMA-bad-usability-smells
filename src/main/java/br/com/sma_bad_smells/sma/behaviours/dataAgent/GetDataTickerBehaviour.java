@@ -20,7 +20,8 @@ public class GetDataTickerBehaviour extends TickerBehaviour {
         try{
             String data = agent.getApiService().getData(API_URL+"/logs");
             agent.setMostRecentData(data);
-            agent.addBehaviour(new SendLogsBehaviour(agent, "translateAgent"));
+            //agent.addBehaviour(new SendLogsBehaviour(agent, "translateAgent"));
+            System.out.println(agent.getLocalName() + ": Dados recebidos com sucesso.");
         } catch (Exception e) {
             System.out.println(agent.getLocalName() + ": falha ao buscar dados | " + e.getMessage());
         }

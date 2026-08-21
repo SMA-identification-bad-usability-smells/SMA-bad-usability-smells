@@ -1,6 +1,7 @@
 package br.com.sma_bad_smells.sma.behaviours.dataAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
+import br.com.sma_bad_smells.sma.agents.PersistenceAgent;
 import br.com.sma_bad_smells.sma.domain.dto.LogsIdsDTO;
 import br.com.sma_bad_smells.sma.domain.dto.NormalizedLogsDTO;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
@@ -14,10 +15,9 @@ import java.util.stream.Collectors;
 
 public class ReceiveInformBehaviour extends CyclicBehaviour {
     private final MessageTemplate messageTemplate = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+    private final PersistenceAgent agent;
 
-    private final DataAgent agent;
-
-    public ReceiveInformBehaviour(DataAgent agent){
+    public ReceiveInformBehaviour(PersistenceAgent agent){
         super(agent);
         this.agent = agent;
     }

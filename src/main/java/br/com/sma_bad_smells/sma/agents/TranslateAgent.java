@@ -1,10 +1,12 @@
 package br.com.sma_bad_smells.sma.agents;
 
+import br.com.sma_bad_smells.sma.behaviours.translateAgent.FetchDataScheduler;
 import br.com.sma_bad_smells.sma.behaviours.translateAgent.GetLogsBehaviour;
 import br.com.sma_bad_smells.sma.behaviours.translateAgent.FormattedLogsBehaviour;
 import br.com.sma_bad_smells.sma.behaviours.translateAgent.NormalizeLogsBehaviour;
 import br.com.sma_bad_smells.sma.domain.models.Logs;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
+import br.com.sma_bad_smells.sma.protocols.fetchdata.FetchDataInitiator;
 import jade.core.Agent;
 
 import java.util.ArrayList;
@@ -17,9 +19,9 @@ public class TranslateAgent extends Agent {
 
     @Override
     protected void setup(){
-        addBehaviour(new GetLogsBehaviour(this));
-        addBehaviour(new FormattedLogsBehaviour(this));
-        addBehaviour(new NormalizeLogsBehaviour(this));
+        addBehaviour(new FetchDataScheduler(this, 10_000));
+        //addBehaviour(new GetLogsBehaviour(this));
+        //addBehaviour(new NormalizeLogsBehaviour(this));
     }
 
     @Override

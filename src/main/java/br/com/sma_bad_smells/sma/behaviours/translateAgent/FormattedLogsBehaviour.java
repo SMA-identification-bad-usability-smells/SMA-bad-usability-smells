@@ -4,6 +4,7 @@ import br.com.sma_bad_smells.sma.agents.TranslateAgent;
 import br.com.sma_bad_smells.sma.domain.models.Logs;
 import br.com.sma_bad_smells.sma.exceptions.LogParsingException;
 import br.com.sma_bad_smells.sma.exceptions.MessageSendingException;
+import br.com.sma_bad_smells.sma.protocols.fetchDataLogsIDS.FetchDataLogsIDSInitiator;
 import br.com.sma_bad_smells.sma.utils.LogParser;
 import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
@@ -30,13 +31,14 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
             agent.setLogsApi(new ArrayList<>());
 
             try {
-                this.sendIdsListMsg();
-            } catch (MessageSendingException e) {
-                System.err.println(agent.getLocalName() + ": falha ao enviar IDs - " + e.getMessage());
+                System.out.println(agent.getLocalName() + ": Enviando lista de ids...");
+                agent.addBehaviour(new FetchDataLogsIDSInitiator(agent));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
-            System.out.println("[LOGS] " + agent.getLogs());
-            System.out.println("Quantiade de logs: " + agent.getLogs().size());
+            //System.out.println("[LOGS] " + agent.getLogs());
+            //System.out.println("Quantiade de logs: " + agent.getLogs().size());
         } else {
             block();
         }
@@ -54,6 +56,7 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
         });
     }
 
+    @Deprecated
     private void sendIdsListMsg(){
         List<Long> ids = agent.getLogs().stream()
                 .map(Logs::getId)
