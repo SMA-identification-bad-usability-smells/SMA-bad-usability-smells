@@ -2,7 +2,7 @@ package br.com.sma_bad_smells.sma.protocols.fetchDataLogsIDS;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.agents.PersistenceAgent;
-import br.com.sma_bad_smells.sma.behaviours.dataAgent.SendLogsIDsBehaviour;
+import br.com.sma_bad_smells.sma.behaviours.persistenceAgent.SendLogsIDsBehaviour;
 import br.com.sma_bad_smells.sma.domain.dto.LogsIdsDTO;
 import br.com.sma_bad_smells.sma.protocols.fetchdata.FetchDataVocabulary;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;

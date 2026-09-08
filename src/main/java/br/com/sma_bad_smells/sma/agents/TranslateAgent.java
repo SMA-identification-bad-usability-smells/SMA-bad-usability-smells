@@ -7,6 +7,8 @@ import br.com.sma_bad_smells.sma.behaviours.translateAgent.NormalizeLogsBehaviou
 import br.com.sma_bad_smells.sma.domain.models.Logs;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import br.com.sma_bad_smells.sma.protocols.fetchdata.FetchDataInitiator;
+import br.com.sma_bad_smells.sma.protocols.fetchNormalizedLogs.FetchNormalizedLogsResponder;
+import br.com.sma_bad_smells.sma.protocols.fetchNormalizedLogsForAnalysis.FetchNormalizedLogsForAnalysisResponder;
 import jade.core.Agent;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ public class TranslateAgent extends Agent {
     @Override
     protected void setup(){
         addBehaviour(new FetchDataScheduler(this, 10_000));
+        addBehaviour(new FetchNormalizedLogsResponder(this));
+        addBehaviour(new FetchNormalizedLogsForAnalysisResponder(this));
         //addBehaviour(new GetLogsBehaviour(this));
         //addBehaviour(new NormalizeLogsBehaviour(this));
     }

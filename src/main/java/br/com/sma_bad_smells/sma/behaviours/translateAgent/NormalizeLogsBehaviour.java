@@ -26,10 +26,13 @@ public class NormalizeLogsBehaviour extends CyclicBehaviour {
             System.out.println("Quantidade de logs normalizados: " + normalizedLogs.size());
             agent.setLogs(new ArrayList<>());
 
-            agent.setNormalizedLogs(normalizedLogs);
+            normalizedLogs.forEach(agent::addNormalizedLogs);
             System.out.println("[NORMALIZED LOGS] " + agent.getNormalizedLogs());
 
-            agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, "dataAgent"));
+            // Não utilizado mais: o envio deixou de ser push. Agora é o DataAgent que pergunta
+            // por logs normalizados (FetchNormalizedLogsInitiator/FetchNormalizedLogsResponder),
+            // então essa lista só fica acumulada aqui até ser buscada.
+            //agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, "dataAgent"));
         }
         else {
             block();

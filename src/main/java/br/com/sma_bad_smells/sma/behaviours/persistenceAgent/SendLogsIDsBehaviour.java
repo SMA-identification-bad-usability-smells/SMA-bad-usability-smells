@@ -1,4 +1,4 @@
-package br.com.sma_bad_smells.sma.behaviours.dataAgent;
+package br.com.sma_bad_smells.sma.behaviours.persistenceAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.agents.PersistenceAgent;

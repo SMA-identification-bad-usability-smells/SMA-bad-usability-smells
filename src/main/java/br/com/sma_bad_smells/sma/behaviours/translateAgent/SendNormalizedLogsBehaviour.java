@@ -9,6 +9,9 @@ import jade.lang.acl.UnreadableException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Não utilizada atualmente: o envio de logs normalizados passou a ser pull-based, via
+// FetchNormalizedLogsInitiator/FetchNormalizedLogsResponder (o DataAgent pergunta ao TranslateAgent
+// em vez de o TranslateAgent empurrar por INFORM). Ver NormalizeLogsBehaviour.
 public class SendNormalizedLogsBehaviour extends OneShotBehaviour {
     private TranslateAgent agent;
     private String recipient;

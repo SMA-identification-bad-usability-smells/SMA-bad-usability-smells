@@ -3,8 +3,6 @@ package br.com.sma_bad_smells.sma.protocols.fetchdata;
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
 import br.com.sma_bad_smells.sma.behaviours.translateAgent.FormattedLogsBehaviour;
 import jade.core.AID;
-import jade.core.Agent;
-import jade.domain.FIPANames;
 import jade.lang.acl.ACLMessage;
 import jade.proto.AchieveREInitiator;
 

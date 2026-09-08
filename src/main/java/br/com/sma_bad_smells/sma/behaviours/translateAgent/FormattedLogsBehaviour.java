@@ -33,6 +33,7 @@ public class FormattedLogsBehaviour extends CyclicBehaviour {
             try {
                 System.out.println(agent.getLocalName() + ": Enviando lista de ids...");
                 agent.addBehaviour(new FetchDataLogsIDSInitiator(agent));
+                agent.addBehaviour(new NormalizeLogsBehaviour(agent));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

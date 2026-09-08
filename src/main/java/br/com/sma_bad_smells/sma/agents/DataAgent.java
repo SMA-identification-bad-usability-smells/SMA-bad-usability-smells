@@ -1,7 +1,7 @@
 package br.com.sma_bad_smells.sma.agents;
 
 import br.com.sma_bad_smells.sma.behaviours.dataAgent.GetDataTickerBehaviour;
-import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveInformBehaviour;
+import br.com.sma_bad_smells.sma.behaviours.persistenceAgent.ReceiveInformBehaviour;
 import br.com.sma_bad_smells.sma.behaviours.dataAgent.ReceiveRequestBehaviour;
 import br.com.sma_bad_smells.sma.protocols.fetchdata.FetchDataResponder;
 import br.com.sma_bad_smells.sma.service.ApiService;

@@ -1,4 +1,4 @@
-package br.com.sma_bad_smells.sma.behaviours.dataAgent;
+package br.com.sma_bad_smells.sma.behaviours.persistenceAgent;
 
 import br.com.sma_bad_smells.sma.agents.DataAgent;
 import br.com.sma_bad_smells.sma.agents.PersistenceAgent;
@@ -29,10 +29,13 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         if(message != null){
             String conversationId = message.getConversationId();
 
-            if(conversationId.equals("mormalized-logs")){
-                sendNormalizedLogsToAPI(message);
-            }
-            else if(conversationId.equals("logs-response")){
+            // Não utilizado mais: SendNormalizedLogsBehaviour (behaviours.dataAgent) passou a ser
+            // usada pelo DataAgent, chamada a partir do FetchNormalizedLogsInitiator, e não recebe
+            // mais um PersistenceAgent no construtor — o envio agora é pull, não por INFORM aqui.
+            //if(conversationId.equals("mormalized-logs")){
+            //    sendNormalizedLogsToAPI(message);
+            //}
+            if(conversationId.equals("logs-response")){
                 sendLogsIDSDTOtoAPI(message);
             }
         }
@@ -41,14 +44,16 @@ public class ReceiveInformBehaviour extends CyclicBehaviour {
         }
     }
 
-    private void sendNormalizedLogsToAPI(ACLMessage message){
-        try {
-            List<NormalizedLogs> normalizedLogs = this.getNormalizedLogsByMessageContent(message);
-            agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, normalizedLogs));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    // Não utilizado mais: ver nota em action(). SendNormalizedLogsBehaviour agora é construída
+    // com um DataAgent, então esta chamada (com um PersistenceAgent) não se aplica mais.
+    //private void sendNormalizedLogsToAPI(ACLMessage message){
+    //    try {
+    //        List<NormalizedLogs> normalizedLogs = this.getNormalizedLogsByMessageContent(message);
+    //        agent.addBehaviour(new SendNormalizedLogsBehaviour(agent, normalizedLogs));
+    //    } catch (Exception e) {
+    //        throw new RuntimeException(e);
+    //    }
+    //}
 
     private List<NormalizedLogs> getNormalizedLogsByMessageContent(ACLMessage message)
             throws UnreadableException {

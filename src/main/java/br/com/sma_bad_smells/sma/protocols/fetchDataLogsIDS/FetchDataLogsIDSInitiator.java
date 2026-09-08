@@ -21,9 +21,7 @@ public class FetchDataLogsIDSInitiator extends AchieveREInitiator {
     }
 
     private static ACLMessage createOrder(TranslateAgent agent) throws IOException {
-        List<Long> ids = agent.getLogs().stream()
-                .map(Logs::getId)
-                .collect(Collectors.toList());
+        List<Long> ids = getIdsList(agent.getLogs());
 
         System.out.println(agent.getLocalName() + ": Lista de ids sendo enviados = " + ids);
 
@@ -34,6 +32,12 @@ public class FetchDataLogsIDSInitiator extends AchieveREInitiator {
         request.setContentObject(new ArrayList<>(ids));
         request.setConversationId("send-api-logs-ids");
         return request;
+    }
+
+    private static List<Long> getIdsList(List<Logs> logs){
+        return logs.stream()
+                .map(Logs::getId)
+                .collect(Collectors.toList());
     }
 
     @Override

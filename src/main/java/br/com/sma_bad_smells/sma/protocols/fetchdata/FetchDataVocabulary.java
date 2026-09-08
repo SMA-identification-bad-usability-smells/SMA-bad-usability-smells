@@ -9,5 +9,4 @@ public final class FetchDataVocabulary {
 
     public static final String RESPONDER_NAME = "dataAgent";
 
-    public static final String ACTION_FETCH = "fetch-latest-data";
 }

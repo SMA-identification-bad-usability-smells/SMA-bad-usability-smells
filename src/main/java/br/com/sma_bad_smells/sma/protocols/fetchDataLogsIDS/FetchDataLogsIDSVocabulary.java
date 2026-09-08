@@ -9,5 +9,4 @@ public final class FetchDataLogsIDSVocabulary {
 
     public static final String RESPONDER_NAME = "persistenceAgent";
 
-    public static final String ACTION_FETCH = "fetch-logs-ids-data";
 }
