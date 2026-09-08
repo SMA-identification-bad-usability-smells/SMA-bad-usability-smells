@@ -47,6 +47,13 @@ public class MainApplication {
             );
             persistenceAgentController.start();
 
+            AgentController patternAgentController = mainContainer.createNewAgent(
+                    "patternAgent",
+                    "br.com.sma_bad_smells.sma.agents.PatternAgent",
+                    new Object[]{}
+            );
+            patternAgentController.start();
+
         } catch (RuntimeException e) {
             System.err.println("Falha ao inicializar.");
             e.printStackTrace();
