@@ -1,6 +1,7 @@
 package br.com.sma_bad_smells.sma.behaviours.translateAgent;
 
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
+import br.com.sma_bad_smells.sma.domain.models.NormalizedBatch;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import br.com.sma_bad_smells.sma.normalization.LogNormalizer;
 import br.com.sma_bad_smells.sma.normalization.LogNormalizerFactory;
@@ -26,8 +27,9 @@ public class NormalizeLogsBehaviour extends CyclicBehaviour {
             System.out.println("Quantidade de logs normalizados: " + normalizedLogs.size());
             agent.setLogs(new ArrayList<>());
 
-            normalizedLogs.forEach(agent::addNormalizedLogs);
-            System.out.println("[NORMALIZED LOGS] " + agent.getNormalizedLogs());
+            agent.addBache(normalizedLogs);
+
+            System.out.println("[NORMALIZED LOGS] " + agent.getNormalizedBatches());
 
             // Não utilizado mais: o envio deixou de ser push. Agora é o DataAgent que pergunta
             // por logs normalizados (FetchNormalizedLogsInitiator/FetchNormalizedLogsResponder),

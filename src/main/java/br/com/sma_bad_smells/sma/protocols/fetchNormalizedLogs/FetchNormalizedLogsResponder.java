@@ -1,6 +1,7 @@
 package br.com.sma_bad_smells.sma.protocols.fetchNormalizedLogs;
 
 import br.com.sma_bad_smells.sma.agents.TranslateAgent;
+import br.com.sma_bad_smells.sma.domain.models.NormalizedBatch;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import jade.domain.FIPAAgentManagement.NotUnderstoodException;
 import jade.domain.FIPAAgentManagement.RefuseException;
@@ -32,16 +33,22 @@ public class FetchNormalizedLogsResponder extends AchieveREResponder {
     protected ACLMessage prepareResultNotification(ACLMessage request, ACLMessage response){
         ACLMessage reply = request.createReply();
 
-        List<NormalizedLogs> normalizedLogs = agent.getNormalizedLogs();
+        List<NormalizedBatch> normalizedBatch = agent.getUnstoredNormalizedBatches();
 
-        if(normalizedLogs == null || normalizedLogs.isEmpty()){
+        if(normalizedBatch == null || normalizedBatch.isEmpty()){
             reply.setPerformative(ACLMessage.FAILURE);
             reply.setContent("Sem logs normalizados disponíveis no momento");
         } else {
+            List<NormalizedLogs> normalizedLogs = new ArrayList<>();
+            normalizedBatch.forEach(normalizedBatch1 -> {
+                normalizedLogs.addAll(normalizedBatch1.getLogs());
+            });
+
             try {
                 reply.setPerformative(ACLMessage.INFORM);
                 reply.setContentObject(new ArrayList<>(normalizedLogs));
-                agent.setNormalizedLogs(new ArrayList<>());
+                normalizedBatch.forEach(NormalizedBatch::markStored);
+                agent.removeFullyConsumedBatches();
             } catch (IOException e) {
                 reply.setPerformative(ACLMessage.FAILURE);
                 reply.setContent("Falha ao serializar logs normalizados");
