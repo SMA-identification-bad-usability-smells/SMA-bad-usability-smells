@@ -1,6 +1,7 @@
 package br.com.sma_bad_smells.sma.protocols.fetchNormalizedLogsForAnalysis;
 
 import br.com.sma_bad_smells.sma.agents.PatternAgent;
+import br.com.sma_bad_smells.sma.behaviours.patternAgent.AnalyzeLogsBehaviour;
 import br.com.sma_bad_smells.sma.domain.models.NormalizedLogs;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
@@ -32,7 +33,7 @@ public class FetchNormalizedLogsForAnalysisInitiator extends AchieveREInitiator 
             @SuppressWarnings("unchecked")
             List<NormalizedLogs> normalizedLogs = (List<NormalizedLogs>) inform.getContentObject();
             System.out.println(agent.getLocalName() + ": recebi " + normalizedLogs.size() + " logs normalizados para analisar.");
-            agent.setNormalizedLogs(normalizedLogs);
+            agent.addBehaviour(new AnalyzeLogsBehaviour(agent, normalizedLogs));
         } catch (UnreadableException e) {
             e.printStackTrace();
         }
